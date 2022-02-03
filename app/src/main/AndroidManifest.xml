@@ -2,14 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mask_simulation">
 
-<<<<<<< HEAD
-=======
+
     <uses-feature android:name="android.hardware.camera.any" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
->>>>>>> 889061f (camera is done)
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

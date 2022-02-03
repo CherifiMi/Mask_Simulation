@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.mask_simulation.R
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.face.FaceDetection
 import java.io.File
 import java.io.IOException
 import java.nio.ByteBuffer
@@ -54,13 +55,16 @@ class CameraFragment : Fragment() {
         // Request camera permissions
         if (allPermissionsGranted()) {
             startCamera()
-        } else {
+        } else
+        {
             ActivityCompat.requestPermissions(
                 requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
 
 
         cameraExecutor = Executors.newSingleThreadExecutor()
+
+
 
         return view
     }
@@ -96,8 +100,11 @@ class CameraFragment : Fragment() {
                     })
                 }
 
-            // Select back camera as a default
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            /* ! Select back camera as a default
+            ! val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA*/
+
+            // Select front camera as a default
+            val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
 
             try {
                 // Unbind use cases before rebinding
@@ -126,72 +133,48 @@ class CameraFragment : Fragment() {
         }
     }
 
-    /*private fun takePhoto() {
-        // Get a stable reference of the modifiable image capture use case
-        val imageCapture = imageCapture ?: return
 
-        // Create time-stamped output file to hold the image
-        val photoFile = File(
-            outputDirectory,
-            SimpleDateFormat(FILENAME_FORMAT, Locale.US
-            ).format(System.currentTimeMillis()) + ".jpg")
-
-        // Create output options object which contains file + metadata
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-
-        imageCapture.takePicture(
-            outputOptions, ContextCompat.getMainExecutor(requireContext()), object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
-                }
-
-                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val savedUri = Uri.fromFile(photoFile)
-                    //val msg = "Photo capture succeeded: $savedUri"
-                    //Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
-                    //Log.d(TAG, msg)
-
-                    //.........send the image to the ml kit here and navigate
-                    try {
-                        image = InputImage.fromFilePath(requireContext(), savedUri)
-
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-
-
-
-
-                }
-            })
-
-    }*/
 
     //...........analyzer class
-    inner class LuminosityAnalyzer(private val listener: LumaListener) : ImageAnalysis.Analyzer {
+    inner class LuminosityAnalyzer(private val listener: LumaListener) : ImageAnalysis.Analyzer{
 
-        //.................values
-        lateinit var image: InputImage
-
-        private fun ByteBuffer.toByteArray(): ByteArray {
-            rewind()    // Rewind the buffer to zero
-            val data = ByteArray(remaining())
-            get(data)   // Copy the buffer into a byte array
-            return data // Return the byte array
-        }
 
         @SuppressLint("UnsafeOptInUsageError")
         override fun analyze(imageProxy: ImageProxy) {
 
+            val mediaImage = imageProxy.image
+            if (mediaImage != null) {
+                image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
-            val buffer = imageProxy.planes[0].buffer
+
+                // ? Get an instance of FaceDetector
+                val detector = FaceDetection.getClient()
+
+                // ? Process the image
+                val result = detector.process(image)
+                    .addOnSuccessListener { faces ->
+                        // Task completed successfully
+                        for (face in faces){
+                            Log.d("hillo", face.boundingBox.toString())
+                        }
+
+                    }
+                    .addOnFailureListener { e ->
+                        // Task failed with an exception
+                        Log.d("hillo", e.toString())
+                    }
+            }
+
+            imageProxy.close()
+
+            /*val buffer = imageProxy.planes[0].buffer
             val data = buffer.toByteArray()
             val pixels = data.map { it.toInt() and 0xFF }
             val luma = pixels.average()
 
             listener(luma)
 
-            imageProxy.close()
+            imageProxy.close()*/
         }
 
     }
