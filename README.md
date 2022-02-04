@@ -27,7 +27,7 @@
 ##  The app right now
 the app rn gets the live feed of the face coordinates 
 the mask part is still in progress 
-![image](https://user-images.githubusercontent.com/98290339/152496506-6d3f6216-12d5-4287-a592-1e83286d551d.png)
+![image](https://user-images.githubusercontent.com/98290339/152497309-b863cd71-cf5a-4077-a800-7845730d1125.png)
 
 ## Final app envisions
 ![image](https://user-images.githubusercontent.com/98290339/152496715-4a8c7013-a344-4733-9555-f2f774978a10.png)
