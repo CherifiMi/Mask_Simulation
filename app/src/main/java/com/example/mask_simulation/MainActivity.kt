@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var image: InputImage
     private lateinit var cam: PreviewView
     lateinit var mFace: Face
+    private val mainViewModel: MainViewModel by viewModels()
 
-    //private val mainviewModel: MainViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
 
         cam = findViewById(R.id.cam)
 
-        //mainviewModel.addFace(mFace)
 
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -159,14 +158,12 @@ class MainActivity : AppCompatActivity() {
                         */
                         for (face in faces){
 
-                            mFace = face
+                            mainViewModel.addFace(face)
 
-                            val box = face.boundingBox.top.toString()+"//"+
-                                    face.boundingBox.bottom.toString()+"//"+
-                                    face.boundingBox.right.toString()+"//"+
-                                    face.boundingBox.left.toString()
+                            //var box = mainViewModel.face.value?.boundingBox?.left.toString()
+                            //Toast.makeText(this@MainActivity, box, Toast.LENGTH_SHORT).show()
 
-                            Toast.makeText(this@MainActivity, box, Toast.LENGTH_SHORT).show()
+
                         }
 
                         imageProxy.close()
