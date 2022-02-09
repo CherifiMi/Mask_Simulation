@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import com.example.mask_simulation.R
 import com.example.mask_simulation.processing.Mask
+import com.example.mask_simulation.viewModel.MainViewModel
 import processing.android.CompatUtils
 import processing.android.PFragment
 
@@ -14,6 +17,8 @@ import processing.android.PFragment
 class CanvasFragment : Fragment() {
 
     lateinit var sketch: Mask
+
+    private val mainviewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
