@@ -156,6 +156,8 @@ class MainActivity : AppCompatActivity() {
                         // Task completed successfully
                         for (face in faces){mainViewModel.addFace(face)}
 
+
+
                         imageProxy.close()
 
                     }

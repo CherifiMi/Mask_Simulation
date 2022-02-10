@@ -1,16 +1,11 @@
 
 package com.example.mask_simulation.processing
 
-import android.graphics.PointF
-import android.util.Log
 import com.example.mask_simulation.viewModel.MainViewModel
 import com.google.mlkit.vision.face.Face
 import processing.core.PApplet
 
 class Mask(val viewModel: MainViewModel) : PApplet() {
-
-    var Hpr = height/640
-    var Wpr = width/480
 
     override fun setup() {
         background(20f)
@@ -24,20 +19,32 @@ class Mask(val viewModel: MainViewModel) : PApplet() {
         noFill()
         strokeWeight(4f)
         stroke(255)
+        scale(2f)
+        rotateX(PI)
 
-        var faceData =  viewModel.face.value
+        var face =  viewModel.face.value
 
-        if (faceData != null) {
 
-            var top= faceData.boundingBox.top.toFloat()
-            var bottom= faceData.boundingBox.bottom.toFloat()
-            var right= faceData.boundingBox.right.toFloat()
-            var left= faceData.boundingBox.left.toFloat()
+        if (face != null) {
 
-            rect(left, top, right, bottom)
+            conter(face)
+
+
         }
 
 
+
+
+    }
+
+    private fun conter( face: Face) {
+
+        for(i in 1 .. 15){
+            var eyePs = face.getContour(i)?.points
+            for (eye in eyePs!!){
+                point(eye.x, eye.y)
+            }
+        }
 
 
     }
