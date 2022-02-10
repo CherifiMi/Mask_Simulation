@@ -17,16 +17,13 @@
 
 ## Face detection 
 
-![image](https://user-images.githubusercontent.com/98290339/152496260-f0f223a4-5723-4ca2-85fe-e57969e5426d.png)
 
 ## What I learned
 - using [Face detection](https://developers.google.com/ml-kit/vision/face-detection)
 - drawing polygons in processing
 
 
-##  The app right now
-the app rn gets the live feed of the face coordinates 
-the mask part is still in progress 
+##  The app right now 
 ![image](https://user-images.githubusercontent.com/98290339/152497309-b863cd71-cf5a-4077-a800-7845730d1125.png)
 
 ## Final app envisions
