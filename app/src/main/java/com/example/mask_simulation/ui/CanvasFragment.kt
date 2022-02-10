@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.mask_simulation.R
 import com.example.mask_simulation.processing.Mask
 import com.example.mask_simulation.viewModel.MainViewModel
@@ -18,8 +19,13 @@ class CanvasFragment : Fragment() {
 
     lateinit var sketch: Mask
 
-    private val mainviewModel: MainViewModel by viewModels()
+    //............values
+    private lateinit var mainViewModel: MainViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +37,7 @@ class CanvasFragment : Fragment() {
         view.id = CompatUtils.getUniqueViewId()
 
 
-        sketch = Mask()
+        sketch = Mask(mainViewModel)
         val fragment = PFragment(sketch)
         fragment.setView(view, requireActivity())
 

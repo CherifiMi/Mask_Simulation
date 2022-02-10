@@ -15,11 +15,6 @@ class MainViewModel: ViewModel() {
     fun addFace(face: Face){
         mutableFace.value = face
 
-        val box = face.boundingBox.top.toString()+"//"+
-                face.boundingBox.bottom.toString()+"//"+
-                face.boundingBox.right.toString()+"//"+
-                face.boundingBox.left.toString()
-
     }
 
 

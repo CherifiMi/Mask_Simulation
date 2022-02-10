@@ -18,6 +18,7 @@ import com.example.mask_simulation.viewModel.MainViewModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceDetection
+import com.google.mlkit.vision.face.FaceDetectorOptions
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -138,33 +139,22 @@ class MainActivity : AppCompatActivity() {
             if (mediaImage != null) {
                 image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
+                // ? Real-time contour detection
+                val realTimeOpts = FaceDetectorOptions.Builder()
+                    .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
+                    .build()
 
                 // ? Get an instance of FaceDetector
-                val detector = FaceDetection.getClient()
+                val detector = FaceDetection.getClient(realTimeOpts)
+
+
 
                 // ? Process the image
                 val result = detector.process(image)
                     .addOnSuccessListener { faces ->
 
                         // Task completed successfully
-
-                        /*
-                        var top= 303;
-                        var bottom= 492;
-                        var right= 241;
-                        var left= 51;
-
-                        rect(left, top, right-left, bottom-top);
-                        */
-                        for (face in faces){
-
-                            mainViewModel.addFace(face)
-
-                            //var box = mainViewModel.face.value?.boundingBox?.left.toString()
-                            //Toast.makeText(this@MainActivity, box, Toast.LENGTH_SHORT).show()
-
-
-                        }
+                        for (face in faces){mainViewModel.addFace(face)}
 
                         imageProxy.close()
 
