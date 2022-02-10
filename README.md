@@ -24,7 +24,6 @@
 
 
 ##  The app right now 
-![image](https://user-images.githubusercontent.com/98290339/152497309-b863cd71-cf5a-4077-a800-7845730d1125.png)
 
 ## Final app envisions
 ![image](https://user-images.githubusercontent.com/98290339/152496715-4a8c7013-a344-4733-9555-f2f774978a10.png)
