@@ -14,6 +14,9 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.example.mask_simulation.viewModel.MainViewModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
@@ -36,14 +39,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cam: PreviewView
     private val mainViewModel: MainViewModel by viewModels()
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         cam = findViewById(R.id.cam)
 
+        hideSystemBars()
 
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -172,6 +174,15 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+    private fun hideSystemBars() {
+        val windowInsetsController =
+            ViewCompat.getWindowInsetsController(window.decorView) ?: return
+        // Configure the behavior of the hidden system bars
+        windowInsetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        // Hide both the status bar and the navigation bar
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
     }
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
