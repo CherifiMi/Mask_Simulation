@@ -26,9 +26,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+
 
     buildFeatures {
         viewBinding true
@@ -64,4 +62,11 @@ dependencies {
 
     implementation "androidx.camera:camera-view:${camerax_version}"
     implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    // material ui
+    implementation 'com.google.android.material:material:1.5.0'
+
+    // Rive
+    implementation 'app.rive:rive-android:2.0.4'
+    implementation "androidx.startup:startup-runtime:1.1.1"
 }

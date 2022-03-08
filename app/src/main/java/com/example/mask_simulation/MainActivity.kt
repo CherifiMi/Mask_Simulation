@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     lateinit var image: InputImage
     private lateinit var cam: PreviewView
-    lateinit var mFace: Face
     private val mainViewModel: MainViewModel by viewModels()
 
 
@@ -141,7 +140,9 @@ class MainActivity : AppCompatActivity() {
 
                 // ? Real-time contour detection
                 val realTimeOpts = FaceDetectorOptions.Builder()
-                    .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
+                    .setContourMode(FaceDetectorOptions.CONTOUR_MODE_NONE)
+                    .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
+                    .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL)
                     .build()
 
                 // ? Get an instance of FaceDetector
@@ -154,9 +155,9 @@ class MainActivity : AppCompatActivity() {
                     .addOnSuccessListener { faces ->
 
                         // Task completed successfully
-                        for (face in faces){mainViewModel.addFace(face)}
-
-
+                        for (face in faces){
+                            mainViewModel.addFace(face)
+                        }
 
                         imageProxy.close()
 

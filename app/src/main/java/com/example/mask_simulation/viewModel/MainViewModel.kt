@@ -1,5 +1,6 @@
 package com.example.mask_simulation.viewModel
 
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +15,7 @@ class MainViewModel: ViewModel() {
 
     fun addFace(face: Face){
         mutableFace.value = face
-
+        Log.d("HILLOMV", face.toString())
     }
 
 
