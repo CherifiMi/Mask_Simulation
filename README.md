@@ -6,6 +6,7 @@
 </p>
 </br>
 
+<img width="1147" alt="virtual avatar" src="https://user-images.githubusercontent.com/98290339/157391663-02ae31e9-dbe0-4b89-94e7-59fcb77d99b2.png">
 
 ## Tech stack & Open-source libraries
  - build in android studio. kotlin
@@ -23,7 +24,6 @@
 - observing LiveData
  
 ## Final app
-![image](https://user-images.githubusercontent.com/98290339/152496715-4a8c7013-a344-4733-9555-f2f774978a10.png)
 
 ## Data from the Face detection Class 
 
