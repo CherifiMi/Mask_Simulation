@@ -36,7 +36,7 @@ class RiveFragment : Fragment() {
         val p2 = view.findViewById<ProgressBar>(R.id.p2)
         val p3 = view.findViewById<ProgressBar>(R.id.p3)
         val p4 = view.findViewById<ProgressBar>(R.id.p4)
-        var face =  mainViewModel.face
+        val face =  mainViewModel.face
 
 
         face.observe(requireActivity(), {
@@ -69,11 +69,11 @@ class RiveFragment : Fragment() {
             girl.setNumberState("StateL", "L", Leye)
         }
 
-        //----------------------smill
-        var Smill= face.smilingProbability?.times(100f)
-        if (Smill != null) {
-            p3.progress = Smill.toInt()
-            girl.setNumberState("StateS", "S", Smill)
+        //----------------------smile
+        var Smile= face.smilingProbability?.times(100f)
+        if (Smile != null) {
+            p3.progress = Smile.toInt()
+            girl.setNumberState("StateS", "S", Smile)
         }
 
         //----------------------head
