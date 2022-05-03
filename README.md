@@ -29,8 +29,6 @@
 - using [Rive's State Machines](https://help.rive.app/editor/state-machine)
 - using [Rive](https://help.rive.app) in jetpack
 
-## Final app
-![image](https://user-images.githubusercontent.com/98290339/152496715-4a8c7013-a344-4733-9555-f2f774978a10.png)
 
 ## Architecture
 ![image](https://user-images.githubusercontent.com/98290339/152096381-2a8898d3-c351-4032-979d-ebc836e46332.png)
